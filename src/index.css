@@ -1,1 +1,63 @@
 @import "tailwindcss";
+
+/* Tailwind v4 theme customization */
+@theme {
+	/* Font families */
+	--font-family-heading: "Poppins", ui-sans-serif, system-ui, sans-serif;
+	--font-family-body: "Roboto", ui-sans-serif, system-ui, sans-serif;
+	
+	/* Brand colors */
+	--color-brand-200: #ffb2e6;
+	--color-brand-300: #f7aef8;
+	--color-brand-400: #e382f9;
+	--color-brand-700: #9a52ff;
+	--color-brand-800: #8447ff;
+	--color-violet-300: #b388eb;
+	--color-accent-300: #72ddf7;
+	
+	/* Primary semantic colors (dark for headers/text) */
+	--color-primary-900: #111827;
+	--color-primary-700: #374151;
+	
+	/* Secondary semantic color (for CTAs) */
+	--color-secondary-400: #FBBF24;
+	--color-secondary-500: #F59E0B;
+	
+	/* Background */
+	--color-bg-light: #F3F4F6;
+	
+	/* Accent (trust indicators) */
+	--color-accent-600: #2563EB;
+}
+
+/* Brand palette as CSS variables for easy use with Tailwind arbitrary values */
+:root {
+	--brand-200: #ffb2e6;
+	--brand-300: #f7aef8;
+	--brand-400: #e382f9;
+	--brand-700: #9a52ff;
+	--brand-800: #8447ff;
+	--violet-300: #b388eb;
+	--accent-300: #72ddf7;
+}
+
+/* Global styles */
+body {
+	font-family: var(--font-family-body);
+	@apply text-primary-700 bg-white;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: var(--font-family-heading);
+	@apply text-primary-900 font-bold;
+}
+
+/* Hero Slider Progress Bar Animation */
+@keyframes progressBar {
+	from {
+		width: 0%;
+	}
+	to {
+		width: 100%;
+	}
+}
