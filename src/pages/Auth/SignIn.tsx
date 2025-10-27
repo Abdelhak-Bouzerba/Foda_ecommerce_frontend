@@ -75,7 +75,7 @@ export const SignIn: React.FC = () => {
 
     //call API for Login
     try {
-      const response = await fetch(`${baseUrl}/users/login`, {
+      const response = await fetch(`${baseUrl}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -84,6 +84,7 @@ export const SignIn: React.FC = () => {
           email: formData.email,
           password: formData.password,
         }),
+        credentials: "include",
       });
 
       if (!response.ok) {
@@ -91,7 +92,7 @@ export const SignIn: React.FC = () => {
       }
 
       const data = await response.json();
-      localStorage.setItem("token", data.token);
+      localStorage.setItem("accessToken", data.accessToken);
       navigate("/");
     } catch (err) {
       console.log(err);

@@ -98,7 +98,7 @@ export const SignUp: React.FC = () => {
 
     //call API for Sign Up
     try {
-      const response = await fetch(`${baseUrl}/users/register`, {
+      const response = await fetch(`${baseUrl}/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -108,6 +108,7 @@ export const SignUp: React.FC = () => {
           phoneNumber: formData.phoneNumber,
           password: formData.password,
         }),
+        credentials: "include",
       });
       if (!response.ok) {
         throw new Error("Sign up failed");
