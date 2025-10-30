@@ -1,11 +1,29 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { baseUrl } from "../../data/heroSlides";
+import { useNavigate } from "react-router-dom";
 
 export const Navbar: React.FC = () => {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [cartCount] = useState(3); // Mock cart count
   const [isLoggedIn] = useState(false); // Mock login state
+  const nameRef = useRef<HTMLInputElement | null>(null);
+
+  const handleSearch = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    if (e.key === "Enter") {
+      try {
+        const url = `${baseUrl}/users/get-products?name=${nameRef.current?.value || ""}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        navigate("/shop", { state: { products: data.products } });
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    }
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
@@ -80,6 +98,8 @@ export const Navbar: React.FC = () => {
               <input
                 type="text"
                 placeholder="Search products..."
+                ref={nameRef}
+                onKeyUp={handleSearch}
                 className="w-full px-4 py-2 pl-10 pr-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[color:var(--brand-700)] focus:border-transparent"
               />
               <svg
